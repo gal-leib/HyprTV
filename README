@@ -1,1 +1,8 @@
-HyprTV is a Twitter bot which you can follow and 
+HyprTV is a Twitter bot that sends remiders about TV shows,
+so you'll never forget about when is the latest episode!
+
+I'm planning about adding more features in the future, but for the moment I'm focusing on this aspect.
+
+HyprTV is currently planning to be running on Google App Engine, so it's written to use the unique database GAE offers.
+
+I'll be looking for help in maintaining the database for the TV shows, as I can't sit all day updating all the tv shows.
