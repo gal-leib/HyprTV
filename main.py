@@ -1,32 +1,32 @@
 #!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
+import access
+from twitter import OAuthApi
 
+twitterapi= None
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        self.response.out.write('Hello world!')
+        self.response.out.write('<html><body>')
+
+        trends = twitterapi.ApiCall("trends","GET")["trends"]
+        for trend in trends:
+            self.response.out.write("<p>" + trend["name"] + "</p>")
+        self.response.out.write("</body></html>")
+        #Auto Follow Users
+
+        self.response.out.write("</body></html>")
+
 
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
-                                         debug=True)
-    util.run_wsgi_app(application)
+#    application = webapp.WSGIApplication([('/', MainHandler)],
+#                                         debug=True)
+#    util.run_wsgi_app(application)
+	global twitterapi
+	twitterapi = OAuthApi(access.consumer_key,access.consumer_secret, access.access_token, access.access_secret)
 
 
 if __name__ == '__main__':

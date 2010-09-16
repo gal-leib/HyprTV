@@ -4,5 +4,14 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: .*
+- url: /
   script: main.py
+
+- url: /autofollow
+  script: autofollow.py
+
+- url: /processdms
+  script: CommandsProcessor.py
+
+derived_file_type:
+- python_precompiled

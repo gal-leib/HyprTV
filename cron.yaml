@@ -1,0 +1,8 @@
+cron:
+- description: Auto Follow Users
+  url: /autofollow
+  schedule: 1st monday of sep 17:00
+
+- description: Check DMs
+  url: /processdms
+  schedule: every 20 minutes
