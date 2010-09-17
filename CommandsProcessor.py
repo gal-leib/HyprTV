@@ -6,7 +6,7 @@ from twitter import OAuthApi
 
 #Todo: Clean the print debug code
 
-cmd_pattern =  "^([A-Za-z_]*) '([A-Za-z0-9!@#$%^&* =?><-]*)'"
+cmd_pattern =  "^([A-Za-z_]*) ([A-Za-z0-9!@#$%^&* =?><';-]*)"
 twitterapi = None
 
 def process_DM(dm):
@@ -27,23 +27,37 @@ def process_DM(dm):
 
 class Commands_Processor():
 	@staticmethod
-	def add_reminder(user, tv_show):
-		try:
-			reminder = Reminder()
-			reminder.user=user
-			reminder.tv_show=TV_Show.get_tv_show_by_name(tv_show)
-			reminder.put()
-		except:
-			twitterapi.SendDM(user, "Couldn't add the reminder. Maybe the show isn't in our database yet.")
-			print("Couldn't add the reminder. Maybe the show isn't in our database yet")
+	def follow(user, params):
+		pattern = "'([A-Za-z0-9!@#$%^&* =?><-]*)'"
+		match = re.match(pattern, params)
+		if match:
+			tv_show = match.group(1)
+			try:
+				reminder = Reminder()
+				reminder.user=user
+				reminder.tv_show=TV_Show.get_tv_show_by_name(tv_show)
+				reminder.put()
+			except:
+				twitterapi.SendDM(user, "Couldn't add the reminder. Maybe " + tv_show +" isn't in our database yet.")
+				print("Couldn't add the reminder. Maybe the show isn't in our database yet")
 
 	@staticmethod
-	def del_reminder(user, tv_show):
-		try:
-			reminder = Reminder.get_single_reminder(user,tv_show)
-			reminder.delete()
-		except:
-			twitterapi.SendDM(user, "Couldn't delete the reminder. Maybe it's nonexistent or you got the name wrong?")
+	def unfollow(user, params):
+		pattern = "'([A-Za-z0-9!@#$%^&* =?><-]*)'"
+		match = re.match(pattern, params)
+		if match:
+			tv_show = match.group(1)
+			try:
+				reminder = Reminder.get_single_reminder(user,tv_show)
+				reminder.delete()
+			except:
+				twitterapi.SendDM(user, "Couldn't delete the reminder. Maybe it's nonexistent or you got the name wrong?")
+
+	@staticmethod
+	def add_show(user, params):
+		'''add_show 'Fringe' 3 17:21'''
+		pass
+
 
 
 def main():
