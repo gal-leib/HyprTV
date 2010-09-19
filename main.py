@@ -10,7 +10,6 @@ twitterapi= None
 class MainHandler(webapp.RequestHandler):
     def get(self):
         self.response.out.write('<html><body>')
-
         trends = twitterapi.ApiCall("trends","GET")["trends"]
         for trend in trends:
             self.response.out.write("<p>" + trend["name"] + "</p>")

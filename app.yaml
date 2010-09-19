@@ -13,5 +13,8 @@ handlers:
 - url: /processdms
   script: CommandsProcessor.py
 
+- url: /populate
+  script: populate.py
+
 derived_file_type:
 - python_precompiled

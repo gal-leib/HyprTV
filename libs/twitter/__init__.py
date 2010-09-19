@@ -29,7 +29,7 @@ import cgi as urlparse
 
 # Non library modules
 from django.utils import simplejson
-import oauth2 as oauth
+import libs.oauth2 as oauth
 
 # Taken from oauth implementation at: http://github.com/harperreed/twitteroauth-python/tree/master
 REQUEST_TOKEN_URL = 'https://api.twitter.com/oauth/request_token'
