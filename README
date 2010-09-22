@@ -1,3 +1,7 @@
+This project is no longer under my development as I don't feel the need for this project (I can't receive SMS from twitter.) Feel free to fork or use the code to build a twitter bot. The command parsing code is complete.
+
+-----------
+
 HyprTV is a Twitter bot that sends remiders about TV shows,
 so you'll never forget about when is the latest episode!
 
